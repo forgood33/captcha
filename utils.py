@@ -48,7 +48,6 @@ def ran_font(directory_path):
     #path_prefix = '../fonts/'
     # filter out directories
     file_name = random.choice(os.listdir(directory_path))
-    print(file_name)
     font = mfm.FontProperties(fname = directory_path + file_name)
     return font
 
