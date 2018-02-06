@@ -1,5 +1,6 @@
 from scipy.spatial.distance import euclidean
-from random import randint, choice, choices, random
+from random import randint, choices, random
+import random
 import matplotlib.font_manager as mfm
 from matplotlib import pyplot as plt
 from itertools import product
@@ -34,22 +35,8 @@ def ran_locations(num_loc):
 
 def is_colsed2boundry(location):
     v, h = location
-    if v < 50 or h < 50 or v < 294 or h < 294:
-        return choice(0, 90, 180, 270)
-    elif v < 85 and 85 < h < 259:
-        return randint(-5, 95)
-    elif v < 85 and h > 259:
-        return randint(85, 95)
-    elif 85 < v < 259 and h > 259:
-        return randint(85, 185)
-    elif v > 259 and h > 259:
-        return randint(175, 185)
-    elif v > 259 and 85 < h < 259:
-        return randint(175, 275)
-    elif v > 259 and h < 85:
-        return randint(265, 275)
-    elif 85 < v < 259 and h < 85:
-        return randint(-95, 5)
+    if v < 50 or h < 50 or v > 294 or h > 294:
+        return np.random.choice([0, 90, 180, 270])
     else:
         return randint(0, 359)
 
@@ -60,7 +47,8 @@ def ran_font(directory_path):
     file_name = ''
     #path_prefix = '../fonts/'
     # filter out directories
-    file_name = choice(os.listdir(directory_path))
+    file_name = random.choice(os.listdir(directory_path))
+    print(file_name)
     font = mfm.FontProperties(fname = directory_path + file_name)
     return font
 
@@ -69,13 +57,13 @@ def ran_color():
     color_list.remove((0, 0, 0))
     color_list.remove((1, 1, 1))
 
-    r = random()
+    r = np.random.rand()
     if r < 0.7:
         return (1, 1, 1)
     elif r < 0.2:
         return (0, 0, 0)
     else:
-        return choice(color_list)
+        return random.choice(color_list)
 
 def char_upleft(location, angle):
     h = location[0] - np.cos(angle - 45) * 70 / 2
